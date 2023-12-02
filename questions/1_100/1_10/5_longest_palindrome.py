@@ -81,7 +81,108 @@ class Solution2:
         return left + 1, right - 1
 
 
+class Solution3:
+    def longestPalindrome(self, s: str) -> str:
+        start, end = 0, 0
+        for i in range(len(s)):
+            left1, right1 = self.expandAroundCenter(s, i, i)
+            left2, right2 = self.expandAroundCenter(s, i, i + 1)
+            if right1 - left1 > end - start:
+                start, end = left1, right1
+            if right2 - left2 > end - start:
+                start, end = left2, right2
+        return s[start:end + 1]
+
+    def expandAroundCenter(self, s: str, left: int, right: int) -> Tuple[int, int]:
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+
+class Solution4:
+    def longestPalindrome(self, s: str) -> str:
+        start, end = 0, 0
+        for i in range(len(str)):
+            left1, right1 = self.expandAroundCenter(s, i, i)
+            left2, right2 = self.expandAroundCenter(s, i, i + 1)
+            if right1 - left1 >= end - start:
+                start, end = left1, right1
+            if right2 - left2 >= end - start:
+                start, end = left2, right2
+        return s[start:end + 1]
+
+    def expandAroundCenter(self, s: str, left: int, right: int) -> Tuple[int, int]:
+        while left >= 0 and right < len(str) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+
+class Solution5:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        start, end = 0, 0
+        for i in range(n):
+            start1, end1 = self.expandAroundCenter(s, i, i)
+            start2, end2 = self.expandAroundCenter(s, i, i + 1)
+            if end1 - start1 > end - start:
+                start, end = start1, end1
+            if end2 - start2 > end - start:
+                start, end = start2, end2
+        return s[start:end + 1]
+
+    def expandAroundCenter(self, s: str, left: int, right: int) -> Tuple[int, int]:
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+
+class Solution6:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        start, end = 0, 0
+        for i in range(n):
+            left1, right1 = self.expandAroundCenter(s, i, i)
+            left2, right2 = self.expandAroundCenter(s, i, i + 1)
+
+            if right1 - left1 > end - start:
+                start, end = left1, right1
+            if right2 - left2 > end - start:
+                start, end = left2, right2
+
+        return s[start:end + 1]
+
+    def expandAroundCenter(self, s: str, left: int, right: int) -> Tuple[int, int]:
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+
+class Solution7:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        start, end = 0, 0
+        for i in range(n):
+            start1, end1 = self.expandAroundCenter(s, i, i)
+            start2, end2 = self.expandAroundCenter(s, i, i + 1)
+
+            if end1 - start1 > end - start:
+                start, end = start1, end1
+            if end2 - start2 > end - start:
+                start, end = start2, end2
+        return s[start:end + 1]
+
+    def expandAroundCenter(self, s: str, left: int, right: int) -> Tuple[int, int]:
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+
 if __name__ == '__main__':
-    s = "babad"
-    so = Solution2()
-    print(so.longestPalindrome1(s))
+    s = "cbbd"
+    so = Solution7()
+    print(so.longestPalindrome(s))

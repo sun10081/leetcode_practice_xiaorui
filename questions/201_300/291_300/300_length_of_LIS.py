@@ -108,6 +108,33 @@ class Solution4:
         return len(lis)
 
 
+class Solution5:
+    def lengthOfLIS1(self, nums: List[int]) -> int:
+        def dfs(i):
+            res = 0
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    res = max(res, dfs(j))
+            return res + 1
+
+        n = len(nums)
+        ans = 0
+        for i in range(n):
+            ans = max(ans, dfs(i))
+        return ans
+
+    def lengthOfLIS2(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = [0] * n
+        for i in range(n):
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j])
+            dp[i] += 1
+        return max(dp)
+
+
+
 if __name__ == '__main__':
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
     s = Solution4()

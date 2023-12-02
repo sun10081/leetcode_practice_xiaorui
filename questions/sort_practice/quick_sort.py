@@ -11,13 +11,8 @@ import random
 
 
 def generate_random_array(n):
-    nums = [0] * n
-    i = 0
-    while 0 in nums:
-        tmp = random.randint(1, n)
-        if tmp not in nums:
-            nums[i] = tmp
-            i += 1
+    nums = list(range(n))
+    random.shuffle(nums)
     print(nums)
     return nums
 
@@ -115,10 +110,118 @@ class QuickSort2:
         self._quick_sort2(nums, j + 1, r)
 
 
+class QuickSort3:
+    """
+    不稳定 时间复杂度在最坏情况下是O(N2)，平均的时间复杂度是O(N*lgN)
+    """
+
+    def quick_sort(self, nums: List[int]) -> List[int]:
+        self._quick_sort(nums, 0, len(nums) - 1)
+        return nums
+
+    def _quick_sort(self, nums: List[int], l: int, r: int) -> None:
+        if l >= r:
+            return
+        i, j = l - 1, r + 1
+        x = nums[i + j >> 1]
+        while i < j:
+            i += 1
+            while nums[i] < x:
+                i += 1
+            j -= 1
+            while nums[j] > x:
+                j -= 1
+            if i < j:
+                nums[i], nums[j] = nums[j], nums[i]
+        self._quick_sort(nums, l, j)
+        self._quick_sort(nums, j + 1, r)
+
+
+class QuickSort4:
+
+    def quick_sort(self, nums):
+        self._quick_sort(nums, 0, len(nums) - 1)
+        return nums
+
+    def _quick_sort(self, nums, l, r):
+        # 1.递归终止条件
+        if l >= r:
+            return
+        # 2.
+        i, j = l - 1, r + 1
+        # 3.
+        x = nums[i + j >> 1]
+        while i < j:
+            # 4.
+            i += 1
+            while nums[i] < x:
+                i += 1
+            j -= 1
+            while nums[j] > x:
+                j -= 1
+            # 5.
+            if i < j:
+                nums[i], nums[j] = nums[j], nums[i]
+
+        # 6.
+        self._quick_sort(nums, l, j)
+        self._quick_sort(nums, j + 1, r)
+
+
+class QuickSort5:
+
+    def quick_sort(self, nums):
+        self._quick_sort(nums, 0, len(nums) - 1)
+        return nums
+
+    def _quick_sort(self, nums, l, r):
+        if l >= r:
+            return
+        i, j = l - 1, r + 1
+        x = nums[i + j >> 1]
+        while i < j:
+            i += 1
+            while nums[i] < x:
+                i += 1
+            j -= 1
+            while nums[j] > x:
+                j -= 1
+            if i < j:
+                nums[i], nums[j] = nums[j], nums[i]
+        self._quick_sort(nums, l, j)
+        self._quick_sort(nums, j + 1, r)
+
+
+class QuickSort6:
+
+    def quick_sort(self, nums):
+        self._quick_sort(nums, 0, len(nums) - 1)
+
+    def _quick_sort(self, nums, l, r):
+        if l >= r:
+            return
+
+        i, j = l - 1, r + 1
+        x = nums[l + r >> 1]
+        while i < j:
+            i += 1
+            while nums[i] < x:
+                i += 1
+            j -= 1
+            while nums[j] > x:
+                j -= 1
+            if i < j:
+                nums[i], nums[j] = nums[j], nums[i]
+
+        self._quick_sort(nums, l, j)
+        self._quick_sort(nums, j + 1, r)
+
+
 if __name__ == '__main__':
-    nums = generate_random_array(10)
-    qsort = QuickSort2()
+    nums = generate_random_array(100)
+    qsort = QuickSort6()
     time1 = datetime.datetime.now()
-    print(qsort.quick_sort(nums))
+    qsort.quick_sort(nums)
+    print(nums)
     time2 = datetime.datetime.now()
     print(time2 - time1)

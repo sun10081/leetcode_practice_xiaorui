@@ -93,8 +93,56 @@ class Solution3:
         return nums
 
 
+class Solution4:
+    def nextPermutation(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        i = n - 2
+        while i >= 0:
+            if nums[i] < nums[i + 1]:
+                break
+            i -= 1
+        j = n - 1
+        while j >= 0:
+            if nums[j] > nums[i]:
+                break
+            j -= 1
+        if i >= 0:
+            nums[i], nums[j] = nums[j], nums[i]
+        left = i + 1
+        right = n - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+        return nums
+
+
+class Solution5:
+    def nextPermutation(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        i = n - 2
+        while i >= 0:
+            if nums[i] < nums[i + 1]:
+                break
+            i -= 1
+        j = n - 1
+        while j >= 0:
+            if nums[j] > nums[i]:
+                break
+            j -= 1
+        if i >= 0:
+            nums[i], nums[j] = nums[j], nums[i]
+        left = i + 1
+        right = n - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+        return nums
+
+
 if __name__ == '__main__':
-    res = Solution3()
-    array = [1, 5, 8, 4, 7, 6, 5, 3, 1]
+    res = Solution4()
+    array = [4, 5, 6, 7, 0, 1, 2]
     res.nextPermutation(array)
     print(array)

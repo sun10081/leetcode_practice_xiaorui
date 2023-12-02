@@ -47,6 +47,17 @@ class Solution2:
         return dp3
 
 
+class Solution3:
+    def climbStairs1(self, n: int) -> int:
+        dp1, dp2, dp3 = 1, 1, 2
+        if n == 1:
+            return dp2
+        for i in range(2, n):
+            dp1, dp2, dp3 = dp2, dp3, dp2 + dp3
+        return dp3
+
+
+
 if __name__ == '__main__':
     n = 5
     s = Solution2()

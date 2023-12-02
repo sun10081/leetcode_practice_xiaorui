@@ -98,3 +98,32 @@ class Solution4:
             cur = next_node
         return pre
 
+
+class Solution5:
+    def reverseListIteration(self, head: ListNode) -> ListNode:
+        """
+        迭代
+        :param head:
+        :return:
+        """
+        if not head or not head.next:
+            return head
+
+        pre, cur = head, head.next
+        while cur:
+            tmp_node = cur.next
+            cur.next = pre
+            pre = cur
+            cur = tmp_node
+        head.next = None
+        return pre
+
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+
+        tail = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return tail
+

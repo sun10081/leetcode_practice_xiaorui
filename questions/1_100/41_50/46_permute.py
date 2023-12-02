@@ -123,10 +123,83 @@ class Solution4:
         return [list(array) for array in itertools.permutations(nums)]
 
 
+class Solution5:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def dfs():
+            if len(sequence) >= n:
+                ans.append(sequence[:])
+                return
+
+            for i in range(n):
+                if not used[i]:
+                    used[i] = True
+                    sequence.append(nums[i])
+                    dfs()
+                    sequence.pop()
+                    used[i] = False
+
+        n = len(nums)
+        ans = []
+        sequence = []
+        used = [False] * n
+        dfs()
+        return ans
+
+
+class Solution6:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def dfs():
+            if len(sequence) == n:
+                ans.append(sequence[:])
+                print(f"ans append sequence {sequence}")
+                return
+
+            for i in range(n):
+                if not used[i]:
+                    used[i] = True
+                    sequence.append(nums[i])
+                    print(f"append nums[i] {nums[i]}, sequence={sequence}")
+                    dfs()
+                    used[i] = False
+                    sequence.pop()
+                    print(f"after pop, sequence={sequence}")
+
+        n = len(nums)
+        sequence = []
+        used = [False] * n
+        ans = []
+        dfs()
+        return ans
+
+
+class Solution7:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def dfs():
+            print(seq)
+            if len(seq) == n:
+                ans.append(seq[:])
+                return
+
+            for i in range(n):
+                if not uesd[i]:
+                    uesd[i] = True
+                    seq.append(nums[i])
+                    dfs()
+                    seq.pop()
+                    uesd[i] = False
+
+        n = len(nums)
+        seq = []
+        uesd = [False] * n
+        ans = []
+        dfs()
+        return ans
+
+
 if __name__ == '__main__':
     nums = [1, 2, 3]
-    s = Solution4()
+    s = Solution7()
     time1 = datetime.datetime.now()
-    print(s.permute2(nums))
+    print(s.permute(nums))
     time2 = datetime.datetime.now()
     print(f"耗时: {time2 - time1}")

@@ -104,6 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # add
-.idea/
+/.idea/*
 
-./format_title.py
+format_title.py
+/interview/

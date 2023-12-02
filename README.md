@@ -1,4 +1,2 @@
 # leetcode_practice_xiaorui
-记录下刷题的历程<br>
-
-目前大约三百题，按目录检索即可
+这个项目展示了leetcode的python解法, 目前包含1000+题目<br>

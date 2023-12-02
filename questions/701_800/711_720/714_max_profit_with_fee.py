@@ -23,6 +23,25 @@ class Solution:
         return dp_i_0
 
 
+class Solution2:
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        """
+        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0]- prices[i] - fee)
+        :param prices:
+        :return:
+        """
+        l = len(prices)
+        dp0 = 0
+        dp1 = -prices[0] - fee
+        for i in range(l):
+            temp = dp0
+            dp0 = max(dp0, dp1 + prices[i])
+            dp1 = max(dp1, temp - prices[i] - fee)
+        return dp0
+
+
+
 if __name__ == '__main__':
     prices = [1,3,7,5,10,3]
     fee = 3

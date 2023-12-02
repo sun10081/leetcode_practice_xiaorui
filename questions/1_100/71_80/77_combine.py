@@ -81,10 +81,31 @@ class Solution3:
         return ans
 
 
+class Solution4:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        def dfs(i):
+            print(path)
+            d = k - len(path)
+            if d == 0:
+                ans.append(path[:])
+            if d > i:
+                return
+
+            for j in range(i, 0, -1):
+                path.append(j)
+                dfs(j - 1)
+                path.pop()
+
+        ans = []
+        path = []
+        dfs(n)
+        return ans
+
+
 if __name__ == '__main__':
     n = 4
     k = 2
-    s = Solution3()
+    s = Solution4()
     time1 = datetime.datetime.now()
     print(s.combine(n, k))
     time2 = datetime.datetime.now()

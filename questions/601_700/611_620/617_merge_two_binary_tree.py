@@ -6,6 +6,7 @@
 @desc: 
 """
 from questions.public import TreeNode
+from typing import Optional
 
 
 class Solution:
@@ -46,3 +47,20 @@ class Solution2:
         merged.left = self.mergeTrees(root1.left, root2.left)
         merged.right = self.mergeTrees(root1.right, root2.right)
         return merged
+
+
+class Solution3:
+    def mergeTrees(self, t1: Optional[TreeNode], t2: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not t1:
+            return t2
+        if not t2:
+            return t1
+
+        merged = TreeNode(val=t1.val + t2.val)
+        merged.left = self.mergeTrees(t1.left, t2.left)
+        merged.right = self.mergeTrees(t1.right, t2.right)
+        return merged
+
+
+
+

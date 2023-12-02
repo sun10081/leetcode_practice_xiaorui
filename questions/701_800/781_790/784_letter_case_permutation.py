@@ -43,7 +43,27 @@ class Solution:
         return ans
 
 
+
+class Solution2:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        def dfs(i):
+            ans.append(''.join(s_array))
+
+            for j in range(i, n):
+                if s_array[j].isdigit():
+                    continue
+                s_array[j] = s_array[j].swapcase()
+                dfs(j + 1)
+                s_array[j] = s_array[j].swapcase()
+
+        s_array = list(s)
+        n = len(s)
+        ans = []
+        dfs(0)
+        return ans
+
+
 if __name__ == '__main__':
-    S = "3z4"
-    s = Solution()
+    S = "a1b2"
+    s = Solution2()
     print(s.letterCasePermutation(S))
