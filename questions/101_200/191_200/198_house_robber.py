@@ -72,8 +72,17 @@ class Solution3:
         return second
 
 
+class Solution4:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        first, second = 0, nums[0]
+        for i in range(1, n):
+            second, first = max(second, first + nums[i]), second
+        return second
+
+
 if __name__ == '__main__':
-    nums = [2, 7, 9, 3, 1]
+    nums = [1, 1]
     # 2, 2, 3, 4
-    s = Solution3()
-    print(s.rob2(nums))
+    s = Solution4()
+    print(s.rob(nums))

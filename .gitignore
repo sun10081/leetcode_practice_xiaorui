@@ -107,3 +107,4 @@ venv.bak/
 .idea/
 
 ./format_title.py
+./questions/interview

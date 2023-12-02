@@ -21,5 +21,22 @@ class Solution:
         return [list1, list2]
 
 
+class Solution2:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        xor_sum = 0
+        for num in nums:
+            xor_sum ^= num
+        low_bit = xor_sum & -xor_sum
+        num1, num2 = 0, 0
+        for num in nums:
+            if num & low_bit:
+                num1 ^= num
+            else:
+                num2 ^= num
+        return [num1, num2]
+
+
 if __name__ == '__main__':
-    pass
+    s = Solution2()
+    nums = [1, 2, 1, 3, 2, 5]
+    print(s.singleNumber(nums))

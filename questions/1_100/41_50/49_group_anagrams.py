@@ -57,7 +57,16 @@ class Solution:
         return list(mp.values())
 
 
+class Solution1:
+    def group_anagrams(self, strs: List[str]) -> List[List[str]]:
+        count = defaultdict(list)
+        for word in strs:
+            tmp = sorted(word)
+            count["".join(tmp)].append(word)
+        return list(count.values())
+
+
 if __name__ == '__main__':
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-    s = Solution()
-    print(s.group_anagrams3(strs))
+    s = Solution1()
+    print(s.group_anagrams(strs))

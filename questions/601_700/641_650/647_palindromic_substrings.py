@@ -5,6 +5,7 @@
 @time: 2021/12/4 9:21 下午
 @desc: 
 """
+from typing import List
 
 
 class Solution:
@@ -38,7 +39,53 @@ class Solution:
         return ans
 
 
+class Solution2:
+
+    def countSubstrings(self, s: str) -> int:
+        if len(s) == 1:
+            return 1
+        n = len(s)
+        ans = 0
+        for i in range(n):
+            ans += self.center_expand(s, i, i)
+            ans += self.center_expand(s, i, i + 1)
+        return ans
+
+    def center_expand(self, s, l, r) -> int:
+        ans = 0
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+            ans += 1
+        return ans
+
+
+class Solution3:
+
+    def __init__(self):
+        self.ans = []
+
+    def countSubstrings(self, s: str) -> List:
+        if len(s) == 1:
+            return [s]
+        n = len(s)
+        ans = []
+        for i in range(n):
+            ans.extend(self.center_expand(s, i, i))
+            ans.extend(self.center_expand(s, i, i + 1))
+        ans.sort()
+        return ans
+
+    def center_expand(self, s, l, r) -> List:
+        ans = []
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            ans.append(s[l:r + 1])
+            l -= 1
+            r += 1
+        return ans
+
+
 if __name__ == '__main__':
     s = "aaa"
-    so = Solution()
+    so = Solution3()
     print(so.countSubstrings(s))

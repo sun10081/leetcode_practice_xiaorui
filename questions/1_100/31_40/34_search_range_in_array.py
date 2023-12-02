@@ -79,15 +79,55 @@ class Solution3:
         left = binary_search_left()
         right = left
         if left == n or nums[left] != target:
-            return[-1, -1]
+            return [-1, -1]
         for i in range(left + 1, n):
             if nums[i] == target:
                 right = i
         return [left, right]
 
 
+class Solution4:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binary_search_left(num) -> int:
+            l, r = 0, n
+            while l < r:
+                mid = l + r >> 1
+                if nums[mid] < num:
+                    l = mid + 1
+                else:
+                    r = mid
+            return l
+
+        n = len(nums)
+        start = binary_search_left(target)
+        if start == len(nums) or nums[start] != target:
+            return [-1, -1]
+        end = binary_search_left(target + 1) - 1
+        return [start, end]
+
+
+class Solution5:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        n = len(nums)
+        start = self.binary_search_left(nums, target)
+        if start == n or nums[target] != target:
+            return [-1, -1]
+        end = self.binary_search_left(nums, target + 1) - 1
+        return [start, end]
+
+    def binary_search_left(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums)
+        while l < r:
+            mid = l + r >> 1
+            if nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid
+        return l
+
+
 if __name__ == '__main__':
-    nums = [2, 2, 2, 2, 2, 2, 2]
-    target = 2
-    s = Solution3()
+    nums = [5, 7, 7, 8, 8, 10]
+    target = 8
+    s = Solution4()
     print(s.searchRange(nums, target))

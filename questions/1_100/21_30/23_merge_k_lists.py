@@ -83,3 +83,22 @@ class Solution:
             point.next = ListNode(val=heapq.heappop(min_heap))
             point = point.next
         return dummy.next
+
+
+class Solution1:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        # 堆
+        min_heap = []
+        for list_node in lists:
+            while list_node:
+                heapq.heappush(min_heap, list_node.val)
+                list_node = list_node.next
+        dummy = ListNode(0)
+        cur = dummy
+        while min_heap:
+            cur.next = ListNode(val=heapq.heappop(min_heap))
+            cur = cur.next
+        return dummy.next
+
+    def mergeKLists2(self, lists: List[ListNode]) -> ListNode:
+        pass

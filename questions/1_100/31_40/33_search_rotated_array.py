@@ -31,11 +31,81 @@ class Solution:
         return -1
 
 
+class Solution2:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        l, r = 0, n - 1
+        # 4 5 6 1 2 3
+        while l < r:
+            mid = l + r >> 1
+            if nums[mid] < nums[0]:
+                r = mid
+            else:
+                l = mid + 1
+
+        if target < nums[0]:
+            r = n - 1
+        else:
+            l = 0
+
+        while l < r:
+            mid = l + r >> 1
+            if nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid
+        return l if nums[l] == target else -1
+
+
+class Solution3:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        l, r = 0, n - 1
+        while l < r:
+            mid = l + r >> 1
+            if nums[mid] < nums[0]:
+                r = mid
+            else:
+                l = mid + 1
+
+        if target < nums[0]:
+            r = n - 1
+        else:
+            l = 0
+
+        while l < r:
+            mid = l + r >> 1
+            if nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid
+        return l if nums[l] == target else -1
+
+
+class Solution4:
+    def search(self, nums: List[int], target: int) -> int:
+        def is_blue(i: int) -> bool:
+            end = nums[-1]
+            if nums[i] > end:
+                return end < target <= nums[i]
+            else:
+                return target > end or target <= nums[i]
+
+        n = len(nums)
+        l, r = 0, n
+        while l < r:
+            mid = l + r >> 1
+            if is_blue(mid):
+                r = mid
+            else:
+                l = mid + 1
+        if l == n or nums[l] != target:
+            return -1
+        return l
+
+
 if __name__ == '__main__':
-    nums = [4, 5, 6, 7, 0, 1, 2]
-    target = 0
-    s = Solution()
+    nums = [1, 3]
+    target = 3
+    s = Solution4()
     print(s.search(nums, target))
-
-
-

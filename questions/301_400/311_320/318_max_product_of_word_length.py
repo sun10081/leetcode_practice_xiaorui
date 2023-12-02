@@ -38,7 +38,24 @@ class Solution2:
         return max_product
 
 
+class Solution3:
+    def maxProduct(self, words: List[str]) -> int:
+        ans = 0
+        masks = defaultdict(int)
+        for word in words:
+            mask = 0
+            for ch in word:
+                mask |= 1 << (ord(ch) - ord('a'))
+            masks[mask] = max(masks[mask], len(word))
+
+        for i in masks:
+            for j in masks:
+                if i & j == 0:
+                    ans = max(ans, masks[i] * masks[j])
+        return ans
+
+
 if __name__ == '__main__':
-    words = ["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]
-    s = Solution()
+    words = ["meet", "met"]
+    s = Solution2()
     print(s.maxProduct(words))

@@ -71,7 +71,40 @@ class Solution2:
         return ans
 
 
+class Solution3:
+    def longestValidParentheses(self, s: str) -> int:
+        ans = 0
+        n = len(s)
+        lc, rc = 0, 0
+        # 从左到右
+        for i in range(n):
+            if s[i] == '(':
+                lc += 1
+            else:
+                rc += 1
+
+            if lc == rc:
+                ans = max(ans, lc * 2)
+            elif lc < rc:
+                lc, rc = 0, 0
+
+        # 从右到左
+        lc, rc = 0, 0
+        for i in range(n - 1, -1, -1):
+            if s[i] == '(':
+                lc += 1
+            else:
+                rc += 1
+
+            if lc == rc:
+                ans = max(ans, lc * 2)
+            elif lc > rc:
+                lc, rc = 0, 0
+
+        return ans
+
+
 if __name__ == '__main__':
-    s = ")()())"
-    solution = Solution2()
+    s = "(()"
+    solution = Solution3()
     print(solution.longestValidParentheses(s))

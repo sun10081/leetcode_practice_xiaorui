@@ -97,11 +97,89 @@ class Solution3:
         return ans
 
 
+class Solution4:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def dfs(surplus: int, index: int):
+            if surplus == 0:
+                ans.append(seq[:])
+                return
+            if index == n:
+                return
+
+            dfs(surplus, index + 1)
+            if surplus - candidates[index] >= 0:
+                seq.append(candidates[index])
+                dfs(surplus - candidates[index], index)
+                seq.pop()
+
+            #  不可以取同一个数的情况
+            # for i in range(index, n):
+            #     if surplus - candidates[i] >= 0:
+            #         seq.append(candidates[i])
+            #         dfs(surplus - candidates[i], i + 1)
+            #         seq.pop()
+
+        ans = []
+        seq = []
+        n = len(candidates)
+        dfs(target, 0)
+        return ans
+
+
+class Solution5:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def dfs(i, total):
+            print(path)
+            if total == 0:
+                ans.append(path[:])
+                return
+            if i == n:
+                return
+
+            for j in range(i, n):
+                x = candidates[j]
+                if total >= x:
+                    path.append(x)
+                    dfs(j, total - x)
+                    path.pop()
+
+        ans = []
+        path = []
+        n = len(candidates)
+        dfs(0, target)
+        return ans
+
+
+class Solution6:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def dfs(i, total):
+            print(path)
+            if total == 0:
+                ans.append(path[:])
+                return
+            if i == n or total < 0:
+                return
+
+            for j in range(i, n):
+                if total >= candidates[j]:
+                    path.append(candidates[j])
+                    dfs(j, total - candidates[j])
+                    path.pop()
+                else:
+                    continue
+
+        ans = []
+        path = []
+        n = len(candidates)
+        dfs(0, target)
+        return ans
+
+
 if __name__ == '__main__':
-    candidates = [2, 3, 5]
-    target = 8
-    s = Solution3()
+    candidates = [2, 3, 6, 7]
+    target = 7
+    s = Solution6()
     time1 = datetime.datetime.now()
-    print(s.combinationSum2(candidates, target))
+    print(s.combinationSum(candidates, target))
     time2 = datetime.datetime.now()
     print(f"耗时: {time2 - time1}")
